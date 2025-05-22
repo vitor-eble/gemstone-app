@@ -1,0 +1,9 @@
+{
+  "/api": {
+    "target": "https://api.hypixel.net",
+    "secure": true,
+    "changeOrigin": true,
+    "logLevel": "debug",
+    "pathRewrite": { "^/api": "" }
+  }
+}

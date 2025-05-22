@@ -3,4 +3,23 @@
     <h1 class="text-3xl">Gemstones</h1>
     <h2 class="text-2xl">Values</h2>
   </div>
+
+  <div *ngFor="let gem of gemstones"
+     class="flex items-center justify-between p-4 rounded-lg shadow-md"
+     [style.backgroundColor]="gem.color + '50' ">
+
+  <div class="flex items-center gap-3">
+    <img [src]="gem.img" [alt]="gem.name" class="w-10 h-10" title="idk">
+    <span [style.color]="gem.color" class="font-semibold">{{ gem.name }}</span>
+  </div>
+
+  <input type="number" min="0" [(ngModel)]="gemstoneQuantities[gem.key]"
+         class="w-16 border rounded p-1 text-center" placeholder="Qtd">
+
+  <div class="text-right">
+    <p class="text-sm">Preço por unidade: <span class="font-bold">{{ gemstonePrices[gem.key] | number:'1.2-2' }}</span></p>
+    <p class="text-sm">Total: <span class="font-bold">{{ getTotal(gem.key) | number:'1.2-2' }}</span></p>
+  </div>
+</div>
+
 </div>
