@@ -8,8 +8,6 @@ import { GemstoneService } from './services/gemstone.service';
   styleUrl: './app.component.css'
 })
 export class AppComponent {
-  title = 'gemstone-app';
-
   gemstones = [
     { name: 'Jade', key: 'FLAWLESS_JADE_GEM', img: '/gemstones/flawless_jade_gem.png', color: '#00FF00' },
     { name: 'Ruby', key: 'FLAWLESS_RUBY_GEM', img: '/gemstones/flawless_ruby_gem.png', color: '#FF0000' },
@@ -20,14 +18,19 @@ export class AppComponent {
     { name: 'Sapphire', key: 'FLAWLESS_SAPPHIRE_GEM', img: '/gemstones/flawless_sapphire_gem.png', color: '#0000FF' }
   ];
 
+  focusedGemKey: string | null = null;
+
   gemstonePrices: { [key: string]: number } = {};
   gemstoneQuantities: { [key: string]: number } = {};
 
-  constructor(private gemstoneService: GemstoneService) { }
+  constructor(private gemstoneService: GemstoneService) {}
 
-  ngOnInit(){
+  ngOnInit() {
     this.loadPrices();
-    setInterval(() => this.loadPrices(), 60000)
+    this.loadQuantitiesFromLocalStorage();
+
+    // Atualiza preços a cada 60 segundos
+    setInterval(() => this.loadPrices(), 60000);
   }
 
   loadPrices() {
@@ -39,6 +42,22 @@ export class AppComponent {
     });
   }
 
+  updateQuantity(gemKey: string, quantity: number) {
+    this.gemstoneQuantities[gemKey] = quantity;
+    this.saveQuantitiesToLocalStorage();
+  }
+
+  saveQuantitiesToLocalStorage() {
+    localStorage.setItem('gemstoneQuantities', JSON.stringify(this.gemstoneQuantities));
+  }
+
+  loadQuantitiesFromLocalStorage() {
+    const saved = localStorage.getItem('gemstoneQuantities');
+    if (saved) {
+      this.gemstoneQuantities = JSON.parse(saved);
+    }
+  }
+
   getTotal(gemKey: string): number {
     const qty = this.gemstoneQuantities[gemKey] || 0;
     const price = this.gemstonePrices[gemKey] || 0;
@@ -47,5 +66,13 @@ export class AppComponent {
 
   getTotalAll(): number {
     return this.gemstones.reduce((sum, gem) => sum + this.getTotal(gem.key), 0);
+  }
+
+  onFocus(gemKey: string) {
+    this.focusedGemKey = gemKey;
+  }
+
+  onBlur() {
+    this.focusedGemKey = null;
   }
 }

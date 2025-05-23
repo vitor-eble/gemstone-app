@@ -1,25 +1,55 @@
-<div class="w-full h-screen bg-white">
-  <div class="flex flex-col justify-center items-center font-semibold py-6">
-    <h1 class="text-3xl">Gemstones</h1>
-    <h2 class="text-2xl">Values</h2>
+<div class="w-full h-full bg-white px-5">
+  <div class="flex flex-col justify-center items-center font-semibold py-6 gap-2 ">
+    <h2 class="text-2xl">Total de</h2>
+    <h1 class="text-3xl">Gemstones Flawless</h1>
   </div>
 
-  <div *ngFor="let gem of gemstones"
-     class="flex items-center justify-between p-4 rounded-lg shadow-md"
-     [style.backgroundColor]="gem.color + '50' ">
-
-  <div class="flex items-center gap-3">
-    <img [src]="gem.img" [alt]="gem.name" class="w-10 h-10" title="idk">
-    <span [style.color]="gem.color" class="font-semibold">{{ gem.name }}</span>
+  <div class="w-full h-0.5 bg-zinc-200">
   </div>
 
-  <input type="number" min="0" [(ngModel)]="gemstoneQuantities[gem.key]"
-         class="w-16 border rounded p-1 text-center" placeholder="Qtd">
-
-  <div class="text-right">
-    <p class="text-sm">Preço por unidade: <span class="font-bold">{{ gemstonePrices[gem.key] | number:'1.2-2' }}</span></p>
-    <p class="text-sm">Total: <span class="font-bold">{{ getTotal(gem.key) | number:'1.2-2' }}</span></p>
+  <div class="w-full flex justify-center items-center">
+    <span class="p-4 bg-zinc-200 mt-5 w-full text-center font-semibold text-xl rounded-lg shadow-lg">
+      R$ {{ getTotalAll() | number:'1.2-2'}}
+    </span>
   </div>
-</div>
+
+  <div class="w-full py-5  flex flex-col gap-6">
+    <div *ngFor="let gem of gemstones"
+      class="flex flex-col shadow-lg rounded-lg"
+    >
+      <div class="py-3 px-4 flex justify-between items-center rounded-t-lg" [style.backgroundColor]="gem.color + '40'">
+        <h3 class="font-semibold text-xl pl-1">{{ gem.name }}</h3>
+        <div class="w-12 h-12 flex items-center justify-center rounded-lg shadow-md" [style.backgroundColor]="gem.color + '50'">
+          <img [src]="gem.img" [alt]="gem.name" class="w-10 h-10" title="idk">
+        </div>
+      </div>
+
+      <div class="p-4 rounded-b-xl flex flex-col gap-5 w-full">
+
+        <div class="flex flex-col gap-2 w-full">
+          <p class="text-lg font-medium">Preço por unidade:
+            <span class="font-bold text-base ml-2">{{ gemstonePrices[gem.key] | number:'1.2-2' }}</span>
+          </p>
+
+          <div class="flex items-center w-full">
+            <label for="quantidade" class="text-lg font-medium">Quantidade: </label>
+            <input type="number" id="quantidade" min="0" [(ngModel)]="gemstoneQuantities[gem.key]" (focus)="onFocus(gem.key)" (blur)="onBlur()"
+              (ngModelChange)="updateQuantity(gem.key, gemstoneQuantities[gem.key])" placeholder="0"
+              class=" rounded px-2 py-1 w-48 font-bold text-base ml-3 border-2 border-solid border-gray-300 focus:outline-none placeholder:text-gray-300" [style.active.borderColor]="gem.color + '40'"
+              [ngStyle]="{
+                'border-color': focusedGemKey === gem.key ? gem.color : '#d1d5db'
+              }"
+            >
+          </div>
+
+        </div>
+
+        <div class="font-bold" [style.background-color]="gem.color + '40'" class="p-2 text-xl font-medium text-center rounded-md shadow-md">
+          R$ {{ getTotal(gem.key) | number:'1.2-2' }}
+        </div>
+      </div>
+
+    </div>
+  </div>
 
 </div>
