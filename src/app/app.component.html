@@ -1,4 +1,4 @@
-<div class="w-full h-full bg-white px-5">
+<div class=" h-full bg-white px-5 max-w-6xl flex justify-center flex-col mx-auto">
   <div class="flex flex-col justify-center items-center font-semibold py-6 gap-2 ">
     <h2 class="text-2xl">Total de</h2>
     <h1 class="text-3xl">Gemstones Flawless</h1>
@@ -13,9 +13,16 @@
     </span>
   </div>
 
-  <div class="w-full py-5  flex flex-col gap-6">
-    <div *ngFor="let gem of gemstones"
+  <div class="w-full py-5 grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+    <div *ngFor="let gem of gemstones; let i = index"
       class="flex flex-col shadow-lg rounded-lg"
+      [ngClass]="
+      {
+        'lg:col-span-3': i === gemstones.length - 1,
+        'md:col-span-2': i === gemstones.length - 1,
+
+      }
+      "
     >
       <div class="py-3 px-4 flex justify-between items-center rounded-t-lg" [style.backgroundColor]="gem.color + '40'">
         <h3 class="font-semibold text-xl pl-1">{{ gem.name }}</h3>
@@ -35,7 +42,7 @@
             <label for="quantidade" class="text-lg font-medium">Quantidade: </label>
             <input type="number" id="quantidade" min="0" [(ngModel)]="gemstoneQuantities[gem.key]" (focus)="onFocus(gem.key)" (blur)="onBlur()"
               (ngModelChange)="updateQuantity(gem.key, gemstoneQuantities[gem.key])" placeholder="0"
-              class=" rounded px-2 py-1 w-48 font-bold text-base ml-3 border-2 border-solid border-gray-300 focus:outline-none placeholder:text-gray-300" [style.active.borderColor]="gem.color + '40'"
+              class="w-full max-w-[200px] rounded px-2 py-1 font-bold text-base ml-3 border-2 border-solid border-gray-300 focus:outline-none placeholder:text-gray-300" [style.active.borderColor]="gem.color + '40'"
               [ngStyle]="{
                 'border-color': focusedGemKey === gem.key ? gem.color : '#d1d5db'
               }"

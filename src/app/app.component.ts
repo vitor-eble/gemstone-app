@@ -14,8 +14,8 @@ export class AppComponent {
     { name: 'Amber', key: 'FLAWLESS_AMBER_GEM', img: '/gemstones/flawless_amber_gem.png', color: '#FFBF00' },
     { name: 'Amethyst', key: 'FLAWLESS_AMETHYST_GEM', img: '/gemstones/flawless_amethyst_gem.png', color: '#800080' },
     { name: 'Topaz', key: 'FLAWLESS_TOPAZ_GEM', img: '/gemstones/flawless_topaz_gem.png', color: '#FFD700' },
+    { name: 'Sapphire', key: 'FLAWLESS_SAPPHIRE_GEM', img: '/gemstones/flawless_sapphire_gem.png', color: '#0000FF' },
     { name: 'Jasper', key: 'FLAWLESS_JASPER_GEM', img: '/gemstones/flawless_jasper_gem.png', color: '#FF69B4' },
-    { name: 'Sapphire', key: 'FLAWLESS_SAPPHIRE_GEM', img: '/gemstones/flawless_sapphire_gem.png', color: '#0000FF' }
   ];
 
   focusedGemKey: string | null = null;
