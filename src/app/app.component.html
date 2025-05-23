@@ -16,13 +16,6 @@
   <div class="w-full py-5 grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
     <div *ngFor="let gem of gemstones; let i = index"
       class="flex flex-col shadow-lg rounded-lg"
-      [ngClass]="
-      {
-        'lg:col-span-3': i === gemstones.length - 1,
-        'md:col-span-2': i === gemstones.length - 1,
-
-      }
-      "
     >
       <div class="py-3 px-4 flex justify-between items-center rounded-t-lg" [style.backgroundColor]="gem.color + '40'">
         <h3 class="font-semibold text-xl pl-1">{{ gem.name }}</h3>

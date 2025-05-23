@@ -16,6 +16,7 @@ export class AppComponent {
     { name: 'Topaz', key: 'FLAWLESS_TOPAZ_GEM', img: '/gemstones/flawless_topaz_gem.png', color: '#FFD700' },
     { name: 'Sapphire', key: 'FLAWLESS_SAPPHIRE_GEM', img: '/gemstones/flawless_sapphire_gem.png', color: '#0000FF' },
     { name: 'Jasper', key: 'FLAWLESS_JASPER_GEM', img: '/gemstones/flawless_jasper_gem.png', color: '#FF69B4' },
+    { key: 'GLOSSY_GEMSTONE', name: 'Glossy', img: '/gemstones/glossy-gemstone.png', color: '#E12AFB' }
   ];
 
   focusedGemKey: string | null = null;
